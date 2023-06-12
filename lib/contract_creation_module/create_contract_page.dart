@@ -13,7 +13,17 @@ class CreateContract extends StatefulWidget {
 
   bool showPlayer;
   String? audioPath;
-  CreateContract({Key? key, required this.showPlayer, required this.audioPath}) : super(key: key);
+
+  String? callerName;
+  String? calleeName;
+  String? callerNumber;
+  String? calleeNumber;
+  String? callerEmail;
+  String? calleeEmail;
+
+  CreateContract({Key? key, required this.showPlayer, required this.audioPath,
+    required this.callerName, required this.callerNumber, required this.callerEmail,
+    required this.calleeName, required this.calleeNumber, required this.calleeEmail,}) : super(key: key);
 
 
 
@@ -36,9 +46,23 @@ class _CreateContractState extends State<CreateContract> {
   //   Navigator.pushNamed(context, ContractTypeSelection.id);
   // }
 
+  // void navToSignContract() {
+  //   Navigator.pushNamed(context, SignContract.id);
+  // }
+
   void navToSignContract() {
-    Navigator.pushNamed(context, SignContract.id);
+    // Navigator.pushNamed(context,ShowAudio.id);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SignContract(audioPath: widget.audioPath,
+          callerName: widget.callerName, callerNumber: widget.callerNumber, callerEmail: widget.callerEmail,
+          calleeName: widget.calleeName, calleeNumber: widget.calleeNumber, calleeEmail: widget.calleeEmail,
+        ),
+      ),
+    );
   }
+
 
   void navBackToDashboard() {
     Navigator.popUntil(context, ModalRoute.withName('dashboard_screen'));
@@ -50,68 +74,158 @@ class _CreateContractState extends State<CreateContract> {
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Color(0xff000000),
-        title: Text(
-          // recordingMhi (110:45)
-          'Recording',
-          style: SafeGoogleFont (
-            'Poppins',
-            fontSize: 24*ffem,
-            fontWeight: FontWeight.w400,
-            height: 1.5*ffem/fem,
-            color: Color(0xffffffff),
-          ),
-        ),
-        leading: Container(
-          // vectorbq2 (110:49)
-          margin: EdgeInsets.fromLTRB(15*fem, 15*fem, 15*fem, 15*fem),
-          width: 20*fem,
-          height: 19*fem,
-          child: GestureDetector(
-            onTap: navBackToPrevScreen,
-            child: Image.asset(
-              'assets/page-1/images/vector-Pxk.png',
-              width: 20*fem,
-              height: 19*fem,
+
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   backgroundColor: Color(0xff000000),
+      //   title: Text(
+      //     // recordingMhi (110:45)
+      //     'Recording',
+      //     style: SafeGoogleFont (
+      //       'Poppins',
+      //       fontSize: 24*ffem,
+      //       fontWeight: FontWeight.w400,
+      //       height: 1.5*ffem/fem,
+      //       color: Color(0xffffffff),
+      //     ),
+      //   ),
+      //   leading: Container(
+      //     // vectorbq2 (110:49)
+      //     margin: EdgeInsets.fromLTRB(15*fem, 15*fem, 15*fem, 15*fem),
+      //     width: 20*fem,
+      //     height: 19*fem,
+      //     child: GestureDetector(
+      //       onTap: navBackToPrevScreen,
+      //       child: Image.asset(
+      //         'assets/page-1/images/vector-Pxk.png',
+      //         width: 20*fem,
+      //         height: 19*fem,
+      //       ),
+      //     ),
+      //   ),
+      //   actions: [
+      //     Container(
+      //       // component75hFn (208:127)
+      //       margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 15*fem, 0*fem),
+      //       padding: EdgeInsets.fromLTRB(15*fem, 15*fem, 15*fem, 15*fem),
+      //       height: double.infinity,
+      //       decoration: BoxDecoration (
+      //         border: Border.all(color: Color(0xffffffff)),
+      //         borderRadius: BorderRadius.circular(100*fem),
+      //         gradient: LinearGradient (
+      //           begin: Alignment(0, -1),
+      //           end: Alignment(0, 1),
+      //           colors: <Color>[Color(0xff1b1a1a), Color(0x00d9d9d9)],
+      //           stops: <double>[0, 1],
+      //         ),
+      //       ),
+      //       child: Center(
+      //         // groupxSc (I208:127;141:269)
+      //         child: SizedBox(
+      //           width: 18.53*fem,
+      //           height: 21.61*fem,
+      //           child: GestureDetector(
+      //             onTap: navToUserProfile,
+      //             child: Image.asset(
+      //               'assets/page-1/images/group-cyv.png',
+      //               width: 18.53*fem,
+      //               height: 21.61*fem,
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // ),
+
+        appBar: AppBar(
+          // title: const Text('Contract Renewal'),
+
+          title: Text(
+            // profilegE4 (110:120)
+            'Recording',
+            style: SafeGoogleFont (
+              'Poppins',
+              fontSize: 20*ffem,
+              fontWeight: FontWeight.w400,
+              height: 1.5*ffem/fem,
+              color: Color(0xffffffff),
             ),
           ),
-        ),
-        actions: [
-          Container(
-            // component75hFn (208:127)
-            margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 15*fem, 0*fem),
-            padding: EdgeInsets.fromLTRB(15*fem, 15*fem, 15*fem, 15*fem),
-            height: double.infinity,
-            decoration: BoxDecoration (
-              border: Border.all(color: Color(0xffffffff)),
-              borderRadius: BorderRadius.circular(100*fem),
-              gradient: LinearGradient (
-                begin: Alignment(0, -1),
-                end: Alignment(0, 1),
-                colors: <Color>[Color(0xff1b1a1a), Color(0x00d9d9d9)],
-                stops: <double>[0, 1],
+          leading: Container(
+            // vectorA9n (204:122)
+            margin: EdgeInsets.fromLTRB(15*fem, 0*fem, 0*fem, 0*fem),
+            width: 25*fem,
+            height: 25*fem,
+            child: GestureDetector(
+              onTap: navBackToPrevScreen,
+              child: Image.asset(
+                'assets/page-1/images/arroww.png',
+                width: 25*fem,
+                height: 25*fem,
               ),
             ),
-            child: Center(
-              // groupxSc (I208:127;141:269)
-              child: SizedBox(
-                width: 18.53*fem,
-                height: 21.61*fem,
-                child: GestureDetector(
-                  onTap: navToUserProfile,
-                  child: Image.asset(
-                    'assets/page-1/images/group-cyv.png',
-                    width: 18.53*fem,
-                    height: 21.61*fem,
-                  ),
+          ),
+          backgroundColor: Colors.black,
+          actions: [
+            // IconButton(
+            //   onPressed: () {},
+            //   icon: const Icon(
+            //     Icons.person,
+            //     size: 30,
+            //   ),
+            // ),
+            // const SizedBox(width: 10),
+
+            /*
+          // Container(
+          //   // component75hFn (208:127)
+          //   margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 25 * fem, 0 * fem),
+          //   padding:
+          //   EdgeInsets.fromLTRB(15 * fem, 15 * fem, 15 * fem, 15 * fem),
+          //   height: double.infinity,
+          //   decoration: BoxDecoration(
+          //     border: Border.all(color: Color(0xffffffff)),
+          //     borderRadius: BorderRadius.circular(100 * fem),
+          //     gradient: LinearGradient(
+          //       begin: Alignment(0, -1),
+          //       end: Alignment(0, 1),
+          //       colors: <Color>[Color(0xff1b1a1a), Color(0x00d9d9d9)],
+          //       stops: <double>[0, 1],
+          //     ),
+          //   ),
+          //   child: Center(
+          //     // groupxSc (I208:127;141:269)
+          //     child: SizedBox(
+          //       width: 18.53 * fem,
+          //       height: 21.61 * fem,
+          //       child: GestureDetector(
+          //         onTap: navToUserProfile,
+          //         child: Image.asset(
+          //           'assets/page-1/images/group-cyv.png',
+          //           width: 18.53 * fem,
+          //           height: 21.61 * fem,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          */
+
+            Container(
+              margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 20 * fem, 0 * fem),
+              child: GestureDetector(
+                onTap: navToUserProfile,
+                child: Image.asset(
+                  'assets/page-1/images/profile.png',
                 ),
               ),
             ),
-          ),
-        ],
-      ),
+
+
+          ],
+        ),
+
       body: Container(
         padding: EdgeInsets.fromLTRB(30*fem, 30*fem, 30*fem, 35*fem),
         width: double.infinity,

@@ -33,6 +33,13 @@ import '../trash/show_audio.dart';
 // final String localUserID = "03123456789";
 // final String localUserID = "03350501183";
 
+late String callerNameDummy = "dummy";
+late String calleeNameDummy ="dummy";
+late String otherPersonNumberDummy = "dummy";
+late String yourUserIDDummy = "dummy";
+late String callerEmailDummy = "dummy";
+late String calleeEmailDummy ="dummy";
+
 class RecordingStarter extends StatefulWidget {
   bool recordingOn = false;
   bool showPlayer = false;
@@ -60,7 +67,10 @@ class _RecordingStarterState extends State<RecordingStarter> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => CreateContract(showPlayer: widget.showPlayer, audioPath: widget.Audiopath,),
+        builder: (context) => CreateContract(showPlayer: widget.showPlayer, audioPath: widget.Audiopath,
+          callerName: callerNameDummy, callerNumber: yourUserIDDummy, callerEmail: callerEmailDummy ,
+          calleeName: calleeNameDummy, calleeNumber: otherPersonNumberDummy, calleeEmail: callerEmailDummy,
+        ),
       ),
     );
   }
@@ -117,6 +127,10 @@ class _CallInvitationPageState extends State<CallInvitationPage> {
   // late String? _challenges;
   late List<String?> _contactNames;
   late Map<String, dynamic>? _docOfUser;
+  late String callerName = "ccc";
+  late String calleeName ="xxx";
+  late String callerEmail = "@@@";
+  late String calleeEmail ="@-@";
 
   @override
   void initState() {
@@ -136,9 +150,35 @@ class _CallInvitationPageState extends State<CallInvitationPage> {
         .onAmplitudeChanged(const Duration(milliseconds: 300))
         .listen((amp) => setState(() => _amplitude = amp));
 
+
+    getCallerCalleData();
+
     super.initState();
   }
 
+  void getCallerCalleData() async {
+    try{
+
+      await for (var snapshot in _firestore.collection('users').snapshots()) {
+          for (var message in snapshot.docs) {
+            if (message.data()['number'] == widget.yourUserID) {
+              setState(() {
+                callerName = message.data()['name'];
+                callerEmail = message.data()['email'];
+              });
+            }
+            if (message.data()['number'] == widget.otherPersonNumber) {
+              setState(() {
+                calleeName = message.data()['name'];
+                calleeEmail = message.data()['email'];
+              });
+            }
+          }
+        }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   void getLoggedUser() async {
     try {
@@ -232,6 +272,23 @@ class _CallInvitationPageState extends State<CallInvitationPage> {
         showPlayer = true;
         widget.recordingOn = false;
       });
+
+      print("===>>>>>>>>>>>>>>>>>>");
+      print(callerName);
+      print(widget.yourUserID);
+      print(callerEmail);
+      print("===>>>>>>>>>>>>>>>>>>");
+      print(calleeName);
+      print(widget.otherPersonNumber);
+      print(calleeEmail);
+
+      callerNameDummy = callerName;
+      calleeNameDummy = calleeName;
+      otherPersonNumberDummy = widget.otherPersonNumber;
+      yourUserIDDummy = widget.yourUserID;
+      callerEmailDummy = callerEmail;
+      calleeEmailDummy = calleeEmail;
+
       navToShowAudio();
     }
   }
@@ -285,6 +342,11 @@ class _CallInvitationPageState extends State<CallInvitationPage> {
     Navigator.pushNamed(context, UserProfile.id);
   }
 
+  void navBackToPrevScreen(){
+    Navigator.pop(context);
+  }
+
+
   Widget yourPage(BuildContext context) {
     double baseWidth = 360;
     double fem = MediaQuery.of(context).size.width / baseWidth;
@@ -292,52 +354,75 @@ class _CallInvitationPageState extends State<CallInvitationPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Voice Call'),
+        // title: const Text('Voice Call'),
+        title: Text(
+          // profilegE4 (110:120)
+          'Voice Call',
+          style: SafeGoogleFont (
+            'Poppins',
+            fontSize: 22*ffem,
+            fontWeight: FontWeight.w400,
+            height: 1.5*ffem/fem,
+            color: Color(0xffffffff),
+          ),
+        ),
         backgroundColor: Colors.black,
         leading: Container(
           // vectorA9n (204:122)
           margin: EdgeInsets.fromLTRB(15*fem, 0*fem, 0*fem, 0*fem),
           width: 25*fem,
           height: 25*fem,
-          child: Image.asset(
-            'assets/page-1/images/arroww.png',
-            width: 25*fem,
-            height: 25*fem,
+          child: GestureDetector(
+            onTap: navBackToPrevScreen,
+            child: Image.asset(
+              'assets/page-1/images/arroww.png',
+              width: 25*fem,
+              height: 25*fem,
+            ),
           ),
         ),
         actions: [
           Container(
-            // component75hFn (208:127)
-            margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 25 * fem, 0 * fem),
-            padding:
-            EdgeInsets.fromLTRB(15 * fem, 15 * fem, 15 * fem, 15 * fem),
-            height: double.infinity,
-            decoration: BoxDecoration(
-              border: Border.all(color: Color(0xffffffff)),
-              borderRadius: BorderRadius.circular(100 * fem),
-              gradient: LinearGradient(
-                begin: Alignment(0, -1),
-                end: Alignment(0, 1),
-                colors: <Color>[Color(0xff1b1a1a), Color(0x00d9d9d9)],
-                stops: <double>[0, 1],
-              ),
-            ),
-            child: Center(
-              // groupxSc (I208:127;141:269)
-              child: SizedBox(
-                width: 18.53 * fem,
-                height: 21.61 * fem,
-                child: GestureDetector(
-                  onTap: navToUserProfile,
-                  child: Image.asset(
-                    'assets/page-1/images/group-cyv.png',
-                    width: 18.53 * fem,
-                    height: 21.61 * fem,
-                  ),
-                ),
+            margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 20 * fem, 0 * fem),
+            child: GestureDetector(
+              onTap: navToUserProfile,
+              child: Image.asset(
+                'assets/page-1/images/profile.png',
               ),
             ),
           ),
+          // Container(
+          //   // component75hFn (208:127)
+          //   margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 25 * fem, 0 * fem),
+          //   padding:
+          //   EdgeInsets.fromLTRB(15 * fem, 15 * fem, 15 * fem, 15 * fem),
+          //   height: double.infinity,
+          //   decoration: BoxDecoration(
+          //     border: Border.all(color: Color(0xffffffff)),
+          //     borderRadius: BorderRadius.circular(100 * fem),
+          //     gradient: LinearGradient(
+          //       begin: Alignment(0, -1),
+          //       end: Alignment(0, 1),
+          //       colors: <Color>[Color(0xff1b1a1a), Color(0x00d9d9d9)],
+          //       stops: <double>[0, 1],
+          //     ),
+          //   ),
+          //   child: Center(
+          //     // groupxSc (I208:127;141:269)
+          //     child: SizedBox(
+          //       width: 18.53 * fem,
+          //       height: 21.61 * fem,
+          //       child: GestureDetector(
+          //         onTap: navToUserProfile,
+          //         child: Image.asset(
+          //           'assets/page-1/images/group-cyv.png',
+          //           width: 18.53 * fem,
+          //           height: 21.61 * fem,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
       body: GestureDetector(
@@ -429,7 +514,9 @@ class _CallInvitationPageState extends State<CallInvitationPage> {
           new MaterialPageRoute(
             builder: (context) =>
                 CreateContract(
-                  showPlayer: showPlayer, audioPath: Audiopath,),));
+                  showPlayer: showPlayer, audioPath: Audiopath,
+                  callerName: callerName, callerNumber: widget.yourUserID, callerEmail: callerEmail ,
+                calleeName: calleeName, calleeNumber: widget.otherPersonNumber,calleeEmail: calleeEmail),));
     });
   }
 

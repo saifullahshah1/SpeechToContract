@@ -12,9 +12,9 @@ import 'contact_module/gallery.dart';
 import 'contract_creation_module/create_contract_page.dart';
 import 'firebase_options.dart';
 
-import 'loginScreen.dart';
+import 'auth_module/loginScreen.dart';
 import 'profiling_module/userProfile_page.dart';
-import 'register.dart';
+import 'auth_module/register.dart';
 import 'trash/dashboardScreen.dart';
 import 'trash/userProfile.dart';
 import 'trash/gallery.dart';
@@ -57,13 +57,13 @@ class _MainState extends State<Main> {
         UserProfile.id: (context) => UserProfile(),
         Gallery.id: (context) => Gallery(),
         Contract.id: (context) => Contract(),
-        SignContract.id: (context) => SignContract(),
+        SignContract.id: (context) => SignContract(audioPath: "",callerName: "", callerNumber: "02222222222", callerEmail: "" ,calleeName: "", calleeNumber: "03333333333", calleeEmail: ""),
         // Contacts.id: (context) => Contacts(),
         CallInvitationPage.id : (context) => CallInvitationPage(recordingOn: false, otherPersonNumber: '03333333333', yourUserID: '02222222222',),
         CreateContact.id: (context) => CreateContact(),
         ContractRequest.id: (context) => ContractRequest(),
         ContractRenewal.id: (context) => ContractRenewal(),
-        CreateContract.id: (context) => CreateContract(showPlayer: false,audioPath: "",),
+        CreateContract.id: (context) => CreateContract(showPlayer: false,audioPath: "",callerName: "", callerNumber: "02222222222", callerEmail: "",  calleeName: "", calleeNumber: "03333333333",calleeEmail: "",),
         ContractTypeSelection.id: (context) => ContractTypeSelection(),
         PreviewContract.id: (context) => PreviewContract(),
         // Home.id : (context) => Home(),

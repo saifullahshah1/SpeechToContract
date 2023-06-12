@@ -2,10 +2,10 @@ import 'package:firebae_reg_auth/trash/dashboardScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'contact_module/dashboard_page.dart';
-import 'firebase_options.dart';
-import 'trash/dashboardScreen.dart';
-import 'main.dart';
+import '../contact_module/dashboard_page.dart';
+import '../firebase_options.dart';
+import '../trash/dashboardScreen.dart';
+import '../main.dart';
 import 'register.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -32,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final emailField = TextFormField(
+        style: TextStyle(color: Colors.white),
         controller: _email,
         autofocus: false,
         validator: (value) {
@@ -45,10 +46,20 @@ class _LoginScreenState extends State<LoginScreen> {
         decoration: InputDecoration(
             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
             hintText: "Email",
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
+          hintStyle: TextStyle(color: Colors.white),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+            borderRadius: BorderRadius.circular(32.0),
+          ),
+
+            // border:
+            //     OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)
+            //     )
+        )
+    );
 
     final passwordField = TextFormField(
+        style: TextStyle(color: Colors.white),
         obscureText: _obscureText,
         controller: _password,
         autofocus: false,
@@ -65,6 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
         decoration: InputDecoration(
             contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
             hintText: "Password",
+            hintStyle: TextStyle(color: Colors.white),
             suffixIcon: IconButton(
               icon:
                   Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
@@ -74,12 +86,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 });
               },
             ),
-            border: OutlineInputBorder(
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
               borderRadius: BorderRadius.circular(32.0),
-            )));
+            ),
+
+            // border: OutlineInputBorder(
+            //   borderRadius: BorderRadius.circular(32.0),
+            // )
+        )
+    );
 
     return Scaffold(
-        backgroundColor: Colors.white70,
+        backgroundColor: Colors.black,
         appBar: AppBar(
           title: Text("Log In"),
           centerTitle: true,

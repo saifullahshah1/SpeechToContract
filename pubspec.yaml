@@ -26,7 +26,6 @@ dependencies:
   permission_handler: ^10.2.0
 #  flutter_svg: ^1.1.5
   google_fonts: ^3.0.1
-
   syncfusion_flutter_pdf: ^18.4.47-beta
   syncfusion_flutter_signaturepad: ^18.4.47-beta
   http: ^0.13.3

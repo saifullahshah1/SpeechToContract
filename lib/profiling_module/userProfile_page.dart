@@ -89,20 +89,34 @@ class _UserProfileState extends State<UserProfile> {
               color: Color(0xffffffff),
             ),
           ),
-            leading: Container(
-              // vectorwnG (110:124)
-              margin: EdgeInsets.fromLTRB(15*fem, 15*fem, 15*fem, 15*fem),
-              width: 20*fem,
-              height: 19*fem,
-              child: GestureDetector(
-                onTap: navBackToPrevScreen,
-                child: Image.asset(
-                  'assets/page-1/images/vector-zoa.png',
-                  width: 20*fem,
-                  height: 19*fem,
-                ),
+            // leading: Container(
+            //   // vectorwnG (110:124)
+            //   margin: EdgeInsets.fromLTRB(15*fem, 15*fem, 15*fem, 15*fem),
+            //   width: 25*fem,
+            //   height: 25*fem,
+            //   child: GestureDetector(
+            //     onTap: navBackToPrevScreen,
+            //     child: Image.asset(
+            //       'assets/page-1/images/arroww.png',
+            //       width: 25*fem,
+            //       height: 25*fem,
+            //     ),
+            //   ),
+            // ),
+          leading: Container(
+            // vectorA9n (204:122)
+            margin: EdgeInsets.fromLTRB(15*fem, 0*fem, 0*fem, 0*fem),
+            width: 25*fem,
+            height: 25*fem,
+            child: GestureDetector(
+              onTap: navBackToPrevScreen,
+              child: Image.asset(
+                'assets/page-1/images/arroww.png',
+                width: 25*fem,
+                height: 25*fem,
               ),
             ),
+          ),
         ),
         body: Container(
             width: screenWidth,

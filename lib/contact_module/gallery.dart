@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import '../contract_module/contract.dart';
 import '../profiling_module/userProfile_page.dart';
 
+import 'package:firebae_reg_auth/profiling_module/utils.dart';
+
 class Gallery extends StatefulWidget {
   static const String id = 'gallery_screen';
   const Gallery({Key? key}) : super(key: key);
@@ -21,6 +23,10 @@ class _GalleryState extends State<Gallery> {
     Navigator.pushNamed(context, Contract.id);
   }
 
+  void navBackToPrevScreen(){
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     double baseWidth = 360;
@@ -30,8 +36,33 @@ class _GalleryState extends State<Gallery> {
       child: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
-          title: const Text('Gallery'),
+          // title: const Text('Gallery'),
+          title: Text(
+            // profilegE4 (110:120)
+            'Gallery',
+            style: SafeGoogleFont (
+              'Poppins',
+              fontSize: 20*ffem,
+              fontWeight: FontWeight.w400,
+              height: 1.5*ffem/fem,
+              color: Color(0xffffffff),
+            ),
+          ),
           backgroundColor: Colors.black,
+          leading: Container(
+            // vectorA9n (204:122)
+            margin: EdgeInsets.fromLTRB(15*fem, 0*fem, 0*fem, 0*fem),
+            width: 25*fem,
+            height: 25*fem,
+            child: GestureDetector(
+              onTap: navBackToPrevScreen,
+              child: Image.asset(
+                'assets/page-1/images/arroww.png',
+                width: 25*fem,
+                height: 25*fem,
+              ),
+            ),
+          ),
           actions: [
             // IconButton(
             //   onPressed: () {},
@@ -41,38 +72,52 @@ class _GalleryState extends State<Gallery> {
             //   ),
             // ),
             // const SizedBox(width: 10),
+
+            /*
+            // Container(
+            //   // component75hFn (208:127)
+            //   margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 25 * fem, 0 * fem),
+            //   padding:
+            //   EdgeInsets.fromLTRB(15 * fem, 15 * fem, 15 * fem, 15 * fem),
+            //   height: double.infinity,
+            //   decoration: BoxDecoration(
+            //     border: Border.all(color: Color(0xffffffff)),
+            //     borderRadius: BorderRadius.circular(100 * fem),
+            //     gradient: LinearGradient(
+            //       begin: Alignment(0, -1),
+            //       end: Alignment(0, 1),
+            //       colors: <Color>[Color(0xff1b1a1a), Color(0x00d9d9d9)],
+            //       stops: <double>[0, 1],
+            //     ),
+            //   ),
+            //   child: Center(
+            //     // groupxSc (I208:127;141:269)
+            //     child: SizedBox(
+            //       width: 18.53 * fem,
+            //       height: 21.61 * fem,
+            //       child: GestureDetector(
+            //         onTap: navToUserProfile,
+            //         child: Image.asset(
+            //           'assets/page-1/images/group-cyv.png',
+            //           width: 18.53 * fem,
+            //           height: 21.61 * fem,
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            */
+
             Container(
-              // component75hFn (208:127)
-              margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 25 * fem, 0 * fem),
-              padding:
-              EdgeInsets.fromLTRB(15 * fem, 15 * fem, 15 * fem, 15 * fem),
-              height: double.infinity,
-              decoration: BoxDecoration(
-                border: Border.all(color: Color(0xffffffff)),
-                borderRadius: BorderRadius.circular(100 * fem),
-                gradient: LinearGradient(
-                  begin: Alignment(0, -1),
-                  end: Alignment(0, 1),
-                  colors: <Color>[Color(0xff1b1a1a), Color(0x00d9d9d9)],
-                  stops: <double>[0, 1],
-                ),
-              ),
-              child: Center(
-                // groupxSc (I208:127;141:269)
-                child: SizedBox(
-                  width: 18.53 * fem,
-                  height: 21.61 * fem,
-                  child: GestureDetector(
-                    onTap: navToUserProfile,
-                    child: Image.asset(
-                      'assets/page-1/images/group-cyv.png',
-                      width: 18.53 * fem,
-                      height: 21.61 * fem,
-                    ),
-                  ),
+              margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 20 * fem, 0 * fem),
+              child: GestureDetector(
+                onTap: navToUserProfile,
+                child: Image.asset(
+                  'assets/page-1/images/profile.png',
                 ),
               ),
             ),
+
           ],
         ),
         body: Padding(
